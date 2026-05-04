@@ -26,7 +26,7 @@
                 FontFamily="DengXian, Microsoft YaHei UI"
                 FontSize="16"
                 FontWeight="SemiBold"
-                Foreground="#2F3133"
+                Foreground="#303236"
                 Background="Transparent"
                 BorderThickness="0"
                 Cursor="Hand"

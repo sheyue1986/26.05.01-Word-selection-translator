@@ -47,44 +47,51 @@
                         Click="Close_Click" />
             </DockPanel>
 
-            <DockPanel Grid.Row="1"
-                       Margin="0,10,0,0">
-                <Border Width="26"
+            <Grid Grid.Row="1"
+                  HorizontalAlignment="Left"
+                  Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="26" />
+                    <ColumnDefinition Width="92" />
+                    <ColumnDefinition Width="32" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Width="26"
                         Height="26"
-                        CornerRadius="7"
+                        Padding="0"
+                        Content="文"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                        Foreground="#303236"
                         Background="#F1F1EE"
                         BorderBrush="#DEDED8"
-                        BorderThickness="1"
-                        DockPanel.Dock="Left"
-                        Margin="0,0,8,0">
-                    <TextBlock Text="文"
-                               Foreground="#2F3133"
-                               FontSize="13"
-                               FontWeight="SemiBold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
-                </Border>
-                <Button x:Name="CaseButton"
-                        Content="Aa"
-                        Width="42"
-                        Height="26"
-                        DockPanel.Dock="Right"
-                        Margin="8,0,0,0"
-                        Padding="0"
-                        Foreground="#2F3133"
-                        Background="#F7F7F5"
-                        BorderBrush="#D9D9D2"
-                        ToolTip="切换译文大小写"
-                        Click="CaseButton_Click" />
+                        ToolTip="目标语言" />
+
                 <ComboBox x:Name="TargetLanguageComboBox"
-                          Width="168"
+                          Grid.Column="1"
+                          Width="86"
                           Height="26"
-                          Padding="8,2"
+                          Margin="6,0,0,0"
+                          Padding="6,2"
                           Foreground="#2F3133"
                           Background="#F7F7F5"
                           BorderBrush="#D9D9D2"
                           SelectionChanged="TargetLanguageComboBox_SelectionChanged" />
-            </DockPanel>
+
+                <Button x:Name="CaseButton"
+                        Grid.Column="2"
+                        Content="Aa"
+                        Width="28"
+                        Height="26"
+                        Margin="4,0,0,0"
+                        Padding="0"
+                        Foreground="#303236"
+                        Background="#F7F7F5"
+                        BorderBrush="#D9D9D2"
+                        ToolTip="切换译文大小写"
+                        Click="CaseButton_Click" />
+            </Grid>
 
             <ScrollViewer Grid.Row="2"
                           MaxHeight="360"
