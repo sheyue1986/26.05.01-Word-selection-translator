@@ -8,7 +8,8 @@ if (-not (Test-Path $exePath)) {
 }
 
 $desktop = [Environment]::GetFolderPath([Environment+SpecialFolder]::DesktopDirectory)
-$shortcutPath = Join-Path $desktop "AI Translator.lnk"
+$shortcutName = "AI " + [char]0x5212 + [char]0x8BCD + [char]0x7FFB + [char]0x8BD1 + [char]0x5668 + ".lnk"
+$shortcutPath = Join-Path $desktop $shortcutName
 $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = $exePath
