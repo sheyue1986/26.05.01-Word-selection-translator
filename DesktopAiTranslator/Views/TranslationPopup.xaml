@@ -64,7 +64,20 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center" />
                 </Border>
+                <Button x:Name="CaseButton"
+                        Content="Aa"
+                        Width="42"
+                        Height="26"
+                        DockPanel.Dock="Right"
+                        Margin="8,0,0,0"
+                        Padding="0"
+                        Foreground="#2F3133"
+                        Background="#F7F7F5"
+                        BorderBrush="#D9D9D2"
+                        ToolTip="切换译文大小写"
+                        Click="CaseButton_Click" />
                 <ComboBox x:Name="TargetLanguageComboBox"
+                          Width="168"
                           Height="26"
                           Padding="8,2"
                           Foreground="#2F3133"

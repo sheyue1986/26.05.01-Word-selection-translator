@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,6 +12,8 @@ namespace DesktopAiTranslator.Views;
 public partial class TranslationPopup : Window
 {
     private bool _isLoadingLanguages;
+    private int _caseMode;
+    private string _originalTranslation = "";
 
     public event EventHandler<string>? TargetLanguageChanged;
     public event EventHandler? RetryRequested;
@@ -68,6 +71,9 @@ public partial class TranslationPopup : Window
 
     public void ShowLoading()
     {
+        _caseMode = 0;
+        _originalTranslation = "";
+        CaseButton.Content = "Aa";
         TranslationTextBox.Text = "";
         StatusText.Text = "翻译中...";
         RetryButton.Visibility = Visibility.Collapsed;
@@ -75,6 +81,9 @@ public partial class TranslationPopup : Window
 
     public void ShowTranslation(string translation)
     {
+        _caseMode = 0;
+        _originalTranslation = translation;
+        CaseButton.Content = "Aa";
         TranslationTextBox.Text = translation;
         StatusText.Text = "";
         RetryButton.Visibility = Visibility.Collapsed;
@@ -82,6 +91,9 @@ public partial class TranslationPopup : Window
 
     public void ShowError(string message)
     {
+        _caseMode = 0;
+        _originalTranslation = "";
+        CaseButton.Content = "Aa";
         TranslationTextBox.Text = "";
         StatusText.Text = message;
         RetryButton.Visibility = Visibility.Visible;
@@ -122,6 +134,34 @@ public partial class TranslationPopup : Window
         {
             TargetLanguageChanged?.Invoke(this, code);
         }
+    }
+
+    private void CaseButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(_originalTranslation))
+        {
+            return;
+        }
+
+        _caseMode = (_caseMode % 3) + 1;
+        TranslationTextBox.Text = _caseMode switch
+        {
+            1 => _originalTranslation.ToUpper(CultureInfo.CurrentCulture),
+            2 => _originalTranslation.ToLower(CultureInfo.CurrentCulture),
+            _ => ToTitleCase(_originalTranslation)
+        };
+        CaseButton.Content = _caseMode switch
+        {
+            1 => "AA",
+            2 => "aa",
+            _ => "Aa"
+        };
+    }
+
+    private static string ToTitleCase(string text)
+    {
+        var lower = text.ToLower(CultureInfo.CurrentCulture);
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lower);
     }
 
     private void CopyTranslation_Click(object sender, RoutedEventArgs e)
